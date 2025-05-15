@@ -4,11 +4,8 @@
   <meta charset="UTF-8">
   <title>Clinic Immunization Logic Model Sorting Game</title>
   <style>
-    /* Reset + layout */
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
@@ -16,7 +13,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
       padding: 40px;
       min-height: 100vh;
     }
@@ -27,7 +23,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      max-width: 1400px;
+      max-width: 1800px;
       width: 100%;
     }
 
@@ -37,21 +33,16 @@
       margin-bottom: 20px;
     }
 
-    h2 {
-      font-size: 20px;
-      margin-top: 40px;
-    }
-
     .container {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
+      flex-direction: row;
+      align-items: center;
+      overflow-x: auto;
+      padding: 20px 0;
     }
 
     .zone {
-      width: 280px;
+      min-width: 220px;
       min-height: 160px;
       background-color: #fff;
       border: 2px dashed #ccc;
@@ -61,12 +52,20 @@
       flex-direction: column;
       align-items: center;
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      margin: 0 10px;
     }
 
     .zone h3 {
       margin-bottom: 10px;
       font-size: 16px;
       color: #0077b6;
+      text-align: center;
+    }
+
+    .arrow {
+      font-size: 24px;
+      color: #999;
+      margin: 0 10px;
     }
 
     .item-bin {
@@ -79,6 +78,7 @@
       border: 2px solid #aaa;
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      max-width: 1200px;
     }
 
     .item {
@@ -126,11 +126,16 @@
 
     <div class="container">
       <div class="zone" data-type="Inputs"><h3>Inputs</h3></div>
+      <div class="arrow">→</div>
       <div class="zone" data-type="Activities"><h3>Activities</h3></div>
+      <div class="arrow">→</div>
       <div class="zone" data-type="Outputs"><h3>Outputs</h3></div>
-      <div class="zone" data-type="Short-Term Outcomes"><h3>Short-Term Outcomes</h3></div>
-      <div class="zone" data-type="Medium-Term Outcomes"><h3>Medium-Term Outcomes</h3></div>
-      <div class="zone" data-type="Long-Term Outcomes"><h3>Long-Term Outcomes</h3></div>
+      <div class="arrow">→</div>
+      <div class="zone" data-type="Short-Term Outcomes"><h3>Short-Term<br>Outcomes</h3></div>
+      <div class="arrow">→</div>
+      <div class="zone" data-type="Medium-Term Outcomes"><h3>Medium-Term<br>Outcomes</h3></div>
+      <div class="arrow">→</div>
+      <div class="zone" data-type="Long-Term Outcomes"><h3>Long-Term<br>Outcomes</h3></div>
     </div>
 
     <h2>Drag Items Below Into The Correct Categories</h2>
