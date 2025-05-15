@@ -1,1 +1,159 @@
 # LHink-web.github.io
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clinic Immunization Logic Model Sorting Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .zone {
+      width: 30%;
+      min-height: 180px;
+      background-color: white;
+      border: 2px dashed #aaa;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 8px;
+    }
+
+    .zone h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .item-bin {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: #e0f7fa;
+      padding: 10px;
+      margin-top: 20px;
+      border: 2px solid #aaa;
+      border-radius: 8px;
+    }
+
+    .item {
+      background-color: #87cefa;
+      padding: 8px 12px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: grab;
+    }
+
+    .correct {
+      background-color: #90ee90 !important;
+    }
+
+    .incorrect {
+      background-color: #f08080 !important;
+    }
+
+    button {
+      display: block;
+      margin: 30px auto 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Clinic Immunization Logic Model Sorting Game</h1>
+
+  <div class="container">
+    <div class="zone" data-type="Inputs"><h3>Inputs</h3></div>
+    <div class="zone" data-type="Activities"><h3>Activities</h3></div>
+    <div class="zone" data-type="Outputs"><h3>Outputs</h3></div>
+    <div class="zone" data-type="Short-Term Outcomes"><h3>Short-Term Outcomes</h3></div>
+    <div class="zone" data-type="Medium-Term Outcomes"><h3>Medium-Term Outcomes</h3></div>
+    <div class="zone" data-type="Long-Term Outcomes"><h3>Long-Term Outcomes</h3></div>
+  </div>
+
+  <h2 style="text-align:center;">Drag Items Below Into The Correct Categories</h2>
+  <div class="item-bin" id="itemBin">
+    <div class="item" draggable="true" data-type="Inputs">Trained Nurses</div>
+    <div class="item" draggable="true" data-type="Outputs"># of Vaccines Given</div>
+    <div class="item" draggable="true" data-type="Inputs">Vaccines Inventory</div>
+    <div class="item" draggable="true" data-type="Long-Term Outcomes">Herd Immunity Achieved</div>
+    <div class="item" draggable="true" data-type="Activities">Conduct Outreach Events</div>
+    <div class="item" draggable="true" data-type="Outputs"># of Staff Trained</div>
+    <div class="item" draggable="true" data-type="Activities">Train New Staff</div>
+  <div class="item" draggable="true" data-type="Medium-Term Outcomes">Increased Immunization Rates</div>
+    <div class="item" draggable="true" data-type="Activities">Administer Vaccines</div>
+    <div class="item" draggable="true" data-type="Activities">Document Immunizations</div>
+    <div class="item" draggable="true" data-type="Outputs"># of Outreach Events Held</div>
+    <div class="item" draggable="true" data-type="Outputs"># of Immunization Records Completed</div>
+    <div class="item" draggable="true" data-type="Short-Term Outcomes">Increased Knowledge of Immunizations</div>
+ <div class="item" draggable="true" data-type="Inputs">Immunization Schedules</div>
+    <div class="item" draggable="true" data-type="Short-Term Outcomes">Improved Clinic Efficiency</div>
+    <div class="item" draggable="true" data-type="Medium-Term Outcomes">Fewer Missed Appointments</div>
+    <div class="item" draggable="true" data-type="Inputs">Funding</div>
+    <div class="item" draggable="true" data-type="Medium-Term Outcomes">Improved Access in Underserved Areas</div>
+    <div class="item" draggable="true" data-type="Long-Term Outcomes">Reduced Disease Incidence</div>
+    <div class="item" draggable="true" data-type="Long-Term Outcomes">Improved Population Health</div>
+  </div>
+
+  <button onclick="checkAnswers()">Check My Answers</button>
+
+  <script>
+    const items = document.querySelectorAll('.item');
+    const zones = document.querySelectorAll('.zone');
+
+    items.forEach(item => {
+      item.addEventListener('dragstart', e => {
+        e.dataTransfer.setData('text/plain', item.dataset.type + '|' + item.textContent);
+        item.classList.remove('correct', 'incorrect');
+      });
+    });
+
+    zones.forEach(zone => {
+      zone.addEventListener('dragover', e => e.preventDefault());
+
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        const data = e.dataTransfer.getData('text/plain');
+        const [type, text] = data.split('|');
+
+        const draggedItem = Array.from(document.querySelectorAll('.item')).find(i => i.textContent === text);
+        if (draggedItem) {
+          zone.appendChild(draggedItem);
+        }
+      });
+    });
+
+    function checkAnswers() {
+      const allItems = document.querySelectorAll('.item');
+      allItems.forEach(item => {
+        const parent = item.parentElement;
+        const expected = item.dataset.type;
+        const actual = parent.dataset.type;
+        item.classList.remove('correct', 'incorrect');
+        if (expected === actual) {
+          item.classList.add('correct');
+        } else {
+          item.classList.add('incorrect');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
